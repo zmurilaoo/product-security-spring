@@ -1,6 +1,7 @@
 package com.product.pip.domain.user;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Data
 @Table(name = "users")
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class User implements UserDetails {
 
@@ -23,13 +25,20 @@ public class User implements UserDetails {
     private UUID id;
 
     @Column(name = "login", nullable = false)
-    private String username;
+    private String login;
 
     @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "role", nullable = false)
     private UserRole role;
+
+
+    public User( String login, String password, UserRole role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -40,7 +49,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return login;
     }
 
     @Override

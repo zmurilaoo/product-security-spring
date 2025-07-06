@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: auth
@@ -12,3 +11,8 @@ spring:
       show-sql: true
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:my-secret-key}
